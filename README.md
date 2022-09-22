@@ -17,5 +17,8 @@ If you just want to watch the incoming stream you can feed the raw MJPEG stream 
   ./a9.py | ffplay -
 ```
 
+== Notice ==
+I wouldn't be surprised if there were an option to use `ffplay` or other standard software to directly connect to the camera output.
+
 == Changelog ==
-*H0ffmann*: Changed script to directly output raw MJPEG data an let `ffmplay` do the cutting and slicing. Stream could also be converted to a format better suitable for streaming. Basicly the only thing the script does is feed the camera with two UDP packages containing the magic byte sequences to initiate MJPEG streaming and then piping this stream from port `8080` to to `stdout`.
+*H0ffmann*: Removed the first UDP package to port 8070 as it's not required. Changed script to directly output raw MJPEG data an let `ffmplay` do the cutting and slicing. Stream could also be converted to a format better suitable for streaming. Basicly the only thing the script does is feed the camera with an UDP packages containing the magic byte sequence to initiate MJPEG streaming and then piping this stream from port `8080` to to `stdout`.

@@ -20,7 +20,6 @@ import sys
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 s.bind(('',0))
-s.sendto(b'\x30\x67\x30\x66', ('192.168.4.153', 8070))
 s.sendto(b'\x42\x76', ('192.168.4.153', 8080))
 while True:
     (buf, rinfo) = s.recvfrom(4096)
