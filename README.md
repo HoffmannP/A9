@@ -1,15 +1,21 @@
-Inspired by the https://github.com/K-Francis-H/little-stars-hack/blob/main/camera_feed_pygame.py file and some other file.
-I used it as a base to create my own Python Script.
+= A9 P2PIP Camera reader =
 
-What it does:
-See the Live-Stream of the A9 mini WiFi Camera in your Browser.
-It sets up a Server and presents a MJPG Stream to the URL: http://127.0.0.1:8081/cam.mjpg or you can also use http://127.0.0.1:8081/cam.html
+== Credit ==
+Inspired by https://github.com/K-Francis-H/little-stars-hack/blob/main/camera_feed_pygame.py
+A still ongoing thread to this kind of cameras can be found at https://community.home-assistant.io/t/popular-a9-mini-wi-fi-camera-the-ha-challenge
 
-How to use it:
-Use the AP Mode of the A9 mini WiFi Camera and connect your device with it.
-Then run the script in a terminal window like this: python3 a9.py
+== What it does ==
+Trigger the A9 mini WiFi Camera to output it's MJPEG stream.
 
-to learn more, visit: https://community.home-assistant.io/t/popular-a9-mini-wi-fi-camera-the-ha-challenge
-
-My Version of the A9 mini Wi-Fi Camera uses the Little Stars App and the SSID starts with BCCQ.
+== Limitations ==
+The MJPEG stream does not have sound even though the A9 camera supports sound. There is currently no way to switch the IR LEDs (and possibly an IR mode of the camera). There is currently no way to set SSID and password to use the A9 camera in any other mode than Accesspoint (AP) mode.
 There are also other Versions out there. It clould be that your variant of the A9 mini WiFi Camera is not compatible with this script.
+
+== How to use it ==
+If you just want to watch the incoming stream you can feed the raw MJPEG stream into the camera like so
+```bash
+  ./a9.py | ffplay -
+```
+
+== Changelog ==
+*H0ffmann*: Changed script to directly output raw MJPEG data an let `ffmplay` do the cutting and slicing. Stream could also be converted to a format better suitable for streaming. Basicly the only thing the script does is feed the camera with two UDP packages containing the magic byte sequences to initiate MJPEG streaming and then piping this stream from port `8080` to to `stdout`.
